@@ -9,7 +9,7 @@ var checkUrl2 = "/android/platform_frameworks_base/blob/";
 var baseRawUrl = "https://raw.githubusercontent.com";
 
 var c = new Crawler({
-	maxConnections: 10,
+	maxConnections: 2,
 	callback: function (error, result, $) {
 	
 		if (null != $) {
@@ -21,12 +21,21 @@ var c = new Crawler({
 
 						var u = "https://github.com" + queuedUrl;
 
-
 						c.queue(u);	
 
 						if (u.indexOf(".java") > -1) {
+							
 							var p = baseRawUrl + queuedUrl;
-							console.log("Url = ", );
+							p = p.replace('/blob/', "/");
+
+							console.log("Url = " + p);
+
+							var fetchUrl = require("fetch").fetchUrl;
+
+							// fetchUrl(p, function(error, meta, body){
+							//     console.log(body.toString());
+							// });
+							
 							var request = http.request(p, function(result) {
 								var data = '';
 								result.on('data', function(chunk) {
@@ -37,7 +46,6 @@ var c = new Crawler({
 									console.log("result:\n" + data);
 								});
 							});
-
 							request.end();
 						}
 				}			
