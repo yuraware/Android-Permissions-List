@@ -14,7 +14,7 @@
   "author": "Yurii Kobets",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.70.0"
-
+    "request": "^2.70.0",
+    "crawler": "0.4.3"
   }
 }

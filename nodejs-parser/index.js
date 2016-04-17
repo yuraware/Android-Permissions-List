@@ -31,8 +31,6 @@ var c = new Crawler({
 							p = p.replace('/blob/', "/");
 
 							console.log("Url = " + p);
-
-							var fetchUrl = require("fetch").fetchUrl;
 							
 							var request = http.request(p, function(result) {
 								var data = '';
@@ -60,7 +58,7 @@ function parseFile(path, content) {
 	var title = comps[comps.length-1]
 	if (title.indexOf('.java') > 0) {
 		data += title;
-		data += '\n\n-';
+		data += '\n\n';
 	}
 
 	return data;
