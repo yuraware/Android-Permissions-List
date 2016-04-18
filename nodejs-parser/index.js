@@ -14,7 +14,7 @@ var c = new Crawler({
 	maxConnections: 2,
 	callback: function (error, result, $) {
 	
-		if (null != $) {
+		if (null != result && null != $) {
 			$('a').each(function(index, a) {
 				var queuedUrl = $(a).attr('href');
 
@@ -43,6 +43,15 @@ var c = new Crawler({
 									writeData(parsed);
 								});
 							});
+
+							request.on('error', function(error) {
+									console.log(error);
+								});
+
+							request.on('uncaughtException', function (err) {
+    								console.log(err);
+							}); 
+
 							request.end();
 						}
 				}			
@@ -58,8 +67,8 @@ function parseFile(path, content) {
 		data += title;
 		data += '\n';
 
-		var permissions = getPermissionsFromString(content);
-		data += permissions;
+		//var permissions = getPermissionsFromString(content);
+		//data += permissions;
 	}
 	return data;
 }
@@ -74,11 +83,12 @@ function getPermissionsFromString(content) {
 		if (line.indexOf('<p>Requires Permission:') > -1) {
 			line = lines[++i];
 			while (line.indexOf('android.Manifest.permission#') > -1) {
-				methodPermissions += (line.split('#')[1]).split('}')[0] + '\n';
+				var permission = (line.split('#')[1]).split('}')[0] + '\n';
+				console.log('permission = ' + permission);
+				methodPermissions +=  permission;
+				line = lines[++i];
 			}
 		}
-
-		//							p = p.replace('/blob/', "/");
 
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
 			methodPermissions = '\n' + line.replace(' {', '') + methodPermissions + '\n'
