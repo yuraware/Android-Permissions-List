@@ -41,7 +41,6 @@ var c = new Crawler({
 								result.on('end', function() {
 									var parsed = parseFile(u, data);
 									writeData(parsed);
-									//console.log("result:\n" + data);
 								});
 							});
 							request.end();
@@ -53,15 +52,50 @@ var c = new Crawler({
 });
 
 function parseFile(path, content) {
+	var title = getFileNameFromPath(path);
 	var data = '';
-	var comps = path.split('/');
-	var title = comps[comps.length-1]
-	if (title.indexOf('.java') > 0) {
+	if (title.length > 0) {
 		data += title;
-		data += '\n\n';
+		data += '\n';
+
+		var permissions = getPermissionsFromString(content);
+		data += permissions;
+	}
+	return data;
+}
+
+function getPermissionsFromString(content) {
+	var data = "";
+	var lines = content.split('\n');
+	for (var i = 0; i < lines.length; i++) {
+		var line = lines[i];
+
+		var methodPermissions = '';
+		if (line.indexOf('<p>Requires Permission:') > -1) {
+			line = lines[++i];
+			while (line.indexOf('android.Manifest.permission#') > -1) {
+				methodPermissions += (line.split('#')[1]).split('}')[0] + '\n';
+			}
+		}
+
+		//							p = p.replace('/blob/', "/");
+
+		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
+			methodPermissions = '\n' + line.replace(' {', '') + methodPermissions + '\n'
+
+			data += methodPermissions;
+			methodPermissions = '';
+		}
+
 	}
 
 	return data;
+}
+
+function getFileNameFromPath(path) {
+	var comps = path.split('/');
+	var title = comps[comps.length-1];
+	return (title.indexOf('.java') > -1) ? title : '';
 }
 
 function writeData(data) {
