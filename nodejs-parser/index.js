@@ -10,6 +10,8 @@ var checkUrl = "/android/platform_frameworks_base/tree/master/";
 var checkUrl2 = "/android/platform_frameworks_base/blob/";
 var baseRawUrl = "https://raw.githubusercontent.com";
 
+var urlMap = {};
+
 var c = new Crawler({
 	maxConnections: 2,
 	callback: function (error, result, $) {
@@ -23,7 +25,12 @@ var c = new Crawler({
 
 						var u = "https://github.com" + queuedUrl;
 
-						c.queue(u);	
+						var containsAddress = u in urlMap;
+						if (!containsAddress) {
+							c.queue(u);
+						}
+						
+						urlMap[u] = true;
 
 						if (u.indexOf(".java") > -1) {
 							
@@ -39,8 +46,13 @@ var c = new Crawler({
 								});
 
 								result.on('end', function() {
-									var parsed = parseFile(u, data);
-									writeData(parsed);
+
+									var alreadyParsed = u in urlMap;
+									if (alreadyParsed) {
+										var parsed = parseFile(u, data);
+										writeData(parsed);	
+									}
+									
 								});
 							});
 
@@ -61,17 +73,20 @@ var c = new Crawler({
 });
 
 function parseFile(path, content) {
-	var title = getFileNameFromPath(path);
+	var title = getFilePath(path);
 	var data = '';
 	if (title.length > 0) {
 		data += title;
-		data += '\n';
+		console.log("title = " + title);
+		data += '\n\n';
 
-		//var permissions = getPermissionsFromString(content);
-		//data += permissions;
+		var permissions = getPermissionsFromString(content);
+		data += permissions;
 	}
 	return data;
 }
+
+var methodPermissions = "";
 
 function getPermissionsFromString(content) {
 	var data = "";
@@ -79,20 +94,25 @@ function getPermissionsFromString(content) {
 	for (var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 
-		var methodPermissions = '';
+		
 		if (line.indexOf('<p>Requires Permission:') > -1) {
 			line = lines[++i];
 			while (line.indexOf('android.Manifest.permission#') > -1) {
 				var permission = (line.split('#')[1]).split('}')[0] + '\n';
-				console.log('permission = ' + permission);
-				methodPermissions +=  permission;
+				permission = permission.split(' ')[0];
+
+				methodPermissions = methodPermissions.concat(permission);
 				line = lines[++i];
+
+				//console.log('permission = ' + permission);
+				//console.log('5methodPermissions = ' + methodPermissions);
 			}
 		}
 
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
-			methodPermissions = '\n' + line.replace(' {', '') + methodPermissions + '\n'
+			methodPermissions = '\n' + line.replace(' {', '').trim() + '\n' + methodPermissions + '\n'
 
+			//console.log('methodPermissions = ' + methodPermissions);
 			data += methodPermissions;
 			methodPermissions = '';
 		}
@@ -101,6 +121,12 @@ function getPermissionsFromString(content) {
 
 	return data;
 }
+
+
+function getFilePath(path) {
+	return path.replace(baseRawUrl, '');
+}
+
 
 function getFileNameFromPath(path) {
 	var comps = path.split('/');
