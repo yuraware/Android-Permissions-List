@@ -76,13 +76,16 @@ function parseFile(path, content) {
 	var title = getFilePath(path);
 	var data = '';
 	if (title.length > 0) {
-		data += title;
-		console.log("title = " + title);
-		data += '\n\n';
-
 		var permissions = getPermissionsFromString(content);
-		data += permissions;
+
+		if (permissions.length > 0) {
+			data += title;
+			//console.log("title = " + title);
+			data += '\n\n';
+			data += permissions;	
+		}
 	}
+
 	return data;
 }
 
@@ -93,7 +96,6 @@ function getPermissionsFromString(content) {
 	var lines = content.split('\n');
 	for (var i = 0; i < lines.length; i++) {
 		var line = lines[i];
-
 		
 		if (line.indexOf('<p>Requires Permission:') > -1) {
 			line = lines[++i];
@@ -101,7 +103,10 @@ function getPermissionsFromString(content) {
 				var permission = (line.split('#')[1]).split('}')[0] + '\n';
 				permission = permission.split(' ')[0];
 
-				methodPermissions = methodPermissions.concat(permission);
+				if (methodPermissions.indexOf(permission) === -1) {
+					methodPermissions = methodPermissions.concat(permission);	
+				}
+				
 				line = lines[++i];
 
 				//console.log('permission = ' + permission);
@@ -122,11 +127,9 @@ function getPermissionsFromString(content) {
 	return data;
 }
 
-
 function getFilePath(path) {
 	return path.replace(baseRawUrl, '');
 }
-
 
 function getFileNameFromPath(path) {
 	var comps = path.split('/');
