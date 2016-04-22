@@ -115,7 +115,18 @@ function getPermissionsFromString(content) {
 		}
 
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
-			methodPermissions = '\n' + line.replace(' {', '').trim() + '\n' + methodPermissions + '\n'
+			var methodSignature = line;
+			
+			while (line.indexOf(' {') > -1) {
+				line = lines[++i];
+				methodSignature += line;
+			}
+
+			methodSignature = methodSignature.replace(' {', '').trim();
+		}
+
+		if (methodPermissions.length > 0 && methodSignature !== undefined && methodSignature.length > 0) {
+			methodPermissions = '\n' + methodSignature + '\n' + methodPermissions + '\n'
 
 			//console.log('methodPermissions = ' + methodPermissions);
 			data += methodPermissions;

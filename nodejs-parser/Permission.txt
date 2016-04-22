@@ -51,3 +51,56 @@ MODIFY_PHONE_STATE
 
 public String sendEnvelopeWithStatus(String content)
 MODIFY_PHONE_STATE
+https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/CarrierConfigManager.java
+
+
+public PersistableBundle getConfigForSubId(int subId)        try {            ICarrierConfigLoader loader = getICarrierConfigLoader();
+READ_PHONE_STATE
+
+public PersistableBundle getConfigForSubId(int subId)        try {            ICarrierConfigLoader loader = getICarrierConfigLoader();
+READ_PHONE_STATE
+https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/TelephonyManager.java
+
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+READ_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+ACCESS_COARSE_LOCATION
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+ACCESS_COARSE_UPDATES
+
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
+
+public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
+MODIFY_PHONE_STATE
