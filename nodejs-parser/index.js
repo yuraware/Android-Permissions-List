@@ -79,9 +79,8 @@ function parseFile(path, content) {
 		var permissions = getPermissionsFromString(content);
 
 		if (permissions.length > 0) {
-			data += title;
+			data += '\n' + title + '\n';
 			//console.log("title = " + title);
-			data += '\n\n';
 			data += permissions;	
 		}
 	}
@@ -115,7 +114,24 @@ function getPermissionsFromString(content) {
 		}
 
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
-			methodPermissions = '\n' + line.replace(' {', '').trim() + '\n' + methodPermissions + '\n'
+			var methodSignature = line;
+			
+			if (line.indexOf(' {') === -1) {
+				while (true) {
+					line = lines[++i];
+					methodSignature += line;
+
+					if (line.indexOf(' {') > -1) { break; }
+				}
+			}
+
+					
+			
+			methodSignature = methodSignature.replace(' {', '').trim();
+		}
+
+		if (methodPermissions.length > 0 && methodSignature !== undefined && methodSignature.length > 0) {
+			methodPermissions = '\n' + methodSignature + '\n' + methodPermissions + '\n'
 
 			//console.log('methodPermissions = ' + methodPermissions);
 			data += methodPermissions;
