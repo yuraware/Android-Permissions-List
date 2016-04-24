@@ -11,9 +11,10 @@ var checkUrl2 = "/android/platform_frameworks_base/blob/";
 var baseRawUrl = "https://raw.githubusercontent.com";
 
 var urlMap = {};
+var fileNameMap = {};
 
 var c = new Crawler({
-	maxConnections: 2,
+	maxConnections: 5,
 	callback: function (error, result, $) {
 	
 		if (null != result && null != $) {
@@ -50,7 +51,9 @@ var c = new Crawler({
 									var alreadyParsed = u in urlMap;
 									if (alreadyParsed) {
 										var parsed = parseFile(u, data);
-										writeData(parsed);	
+										if (parsed.length > 0) {
+											writeData(parsed);		
+										}
 									}
 									
 								});
@@ -73,20 +76,29 @@ var c = new Crawler({
 });
 
 function parseFile(path, content) {
-	var title = getFilePath(path);
-	var data = '';
-	if (title.length > 0) {
-		var permissions = getPermissionsFromString(content);
 
-		if (permissions.length > 0) {
-			data += title;
-			//console.log("title = " + title);
-			data += '\n\n';
-			data += permissions;	
+	var fileName = getFileNameFromPath(path);
+	var fileParsed = fileName in fileNameMap;
+
+	if (!fileParsed) {
+		var title = getFilePath(path);
+		fileNameMap[fileName] = true;
+
+		var data = '';
+		if (title.length > 0) {
+			var permissions = getPermissionsFromString(content);
+
+			if (permissions.length > 0) {
+				data += '\n' + title + '\n';
+				//console.log("title = " + title);
+				data += permissions;	
+			}
 		}
+
+		return data;
 	}
 
-	return data;
+	return '';
 }
 
 var methodPermissions = "";
@@ -117,15 +129,21 @@ function getPermissionsFromString(content) {
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
 			var methodSignature = line;
 			
-			while (line.indexOf(' {') > -1) {
-				line = lines[++i];
-				methodSignature += line;
+			if (line.indexOf(' {') === -1) {
+				while (true) {
+					line = lines[++i];
+					methodSignature += line;
+
+					if (line.indexOf(' {') > -1) { break; }
+				}
 			}
 
 			methodSignature = methodSignature.replace(' {', '').trim();
 		}
 
-		if (methodPermissions.length > 0 && methodSignature !== undefined && methodSignature.length > 0) {
+		if (methodPermissions.length > 0 && methodSignature !== undefined 
+			&& methodSignature.length > 0 && data.indexOf(methodSignature) === -1) {
+			
 			methodPermissions = '\n' + methodSignature + '\n' + methodPermissions + '\n'
 
 			//console.log('methodPermissions = ' + methodPermissions);
