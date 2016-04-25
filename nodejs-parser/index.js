@@ -48,12 +48,9 @@ var c = new Crawler({
 
 								result.on('end', function() {
 
-									var alreadyParsed = u in urlMap;
-									if (alreadyParsed) {
-										var parsed = parseFile(u, data);
-										if (parsed.length > 0) {
-											writeData(parsed);		
-										}
+									var parsed = parseFile(u, data);
+									if (parsed.length > 0) {
+										writeData(parsed);		
 									}
 									
 								});
@@ -129,16 +126,16 @@ function getPermissionsFromString(content) {
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
 			var methodSignature = line;
 			
-			if (line.indexOf(' {') === -1) {
+			if (line.indexOf('{') === -1) {
 				while (true) {
 					line = lines[++i];
 					methodSignature += line;
 
-					if (line.indexOf(' {') > -1) { break; }
+					if (line.indexOf('{') > -1) { break; }
 				}
 			}
 
-			methodSignature = methodSignature.replace(' {', '').trim();
+			methodSignature = methodSignature.replace('{', '').trim();
 		}
 
 		if (methodPermissions.length > 0 && methodSignature !== undefined 

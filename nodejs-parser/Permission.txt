@@ -1,13 +1,13 @@
-https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/CarrierConfigManager.java
 
+https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/CarrierConfigManager.java
 
 public PersistableBundle getConfigForSubId(int subId)
 READ_PHONE_STATE
 
 public PersistableBundle getConfig()
 READ_PHONE_STATE
-https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/TelephonyManager.java
 
+https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/TelephonyManager.java
 
 public String getDeviceSoftwareVersion()
 READ_PHONE_STATE
@@ -40,67 +40,14 @@ MODIFY_PHONE_STATE
 public boolean iccCloseLogicalChannel(int channel)
 MODIFY_PHONE_STATE
 
-public String iccTransmitApduLogicalChannel(int channel, int cla,
+public String iccTransmitApduLogicalChannel(int channel, int cla,            int instruction, int p1, int p2, int p3, String data)
 MODIFY_PHONE_STATE
 
-public String iccTransmitApduBasicChannel(int cla,
+public String iccTransmitApduBasicChannel(int cla,            int instruction, int p1, int p2, int p3, String data)
 MODIFY_PHONE_STATE
 
-public byte[] iccExchangeSimIO(int fileID, int command, int p1, int p2, int p3,
+public byte[] iccExchangeSimIO(int fileID, int command, int p1, int p2, int p3,            String filePath)
 MODIFY_PHONE_STATE
 
 public String sendEnvelopeWithStatus(String content)
-MODIFY_PHONE_STATE
-https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/CarrierConfigManager.java
-
-
-public PersistableBundle getConfigForSubId(int subId)        try {            ICarrierConfigLoader loader = getICarrierConfigLoader();
-READ_PHONE_STATE
-
-public PersistableBundle getConfigForSubId(int subId)        try {            ICarrierConfigLoader loader = getICarrierConfigLoader();
-READ_PHONE_STATE
-https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/TelephonyManager.java
-
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-READ_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-ACCESS_COARSE_LOCATION
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-ACCESS_COARSE_UPDATES
-
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-MODIFY_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-MODIFY_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-MODIFY_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-MODIFY_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
-MODIFY_PHONE_STATE
-
-public String getDeviceSoftwareVersion()        return getDeviceSoftwareVersion(getDefaultSim());
 MODIFY_PHONE_STATE
