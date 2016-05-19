@@ -13,8 +13,35 @@ var baseRawUrl = "https://raw.githubusercontent.com";
 var urlMap = {};
 var fileNameMap = {};
 
-var c = new Crawler({
-	maxConnections: 5,
+var dir = require('node-dir');
+
+traverseFiles();
+
+function traverseFiles() {
+	dir.paths(__dirname, true, function(err, paths) {
+    	if (err) throw err;
+
+    	for (var i in paths) {
+    		var path = paths[i];
+    		var content = readFile(path);
+
+    		var parsed = parseFile(path, content);
+			if (parsed.length > 0) {
+				writeData(parsed);		
+			}
+    	}
+	});
+}
+
+var fs = require('fs');
+
+function readFile(filepath) {
+	return fs.readFileSync(filepath);
+}
+
+function crawlPages() {
+	var c = new Crawler({
+	maxConnections: 16,
 	callback: function (error, result, $) {
 	
 		if (null != result && null != $) {
@@ -34,6 +61,7 @@ var c = new Crawler({
 						urlMap[u] = true;
 
 						if (u.indexOf(".java") > -1) {
+							console.log("uuu =" + u);
 							
 							var p = baseRawUrl + queuedUrl;
 							p = p.replace('/blob/', "/");
@@ -72,8 +100,10 @@ var c = new Crawler({
 	}
 });
 
-function parseFile(path, content) {
+	c.queue('https://github.com/android/platform_frameworks_base');
+}
 
+function parseFile(path, content) {
 	var fileName = getFileNameFromPath(path);
 	var fileParsed = fileName in fileNameMap;
 
@@ -102,6 +132,7 @@ var methodPermissions = "";
 
 function getPermissionsFromString(content) {
 	var data = "";
+	content = content + ''
 	var lines = content.split('\n');
 	for (var i = 0; i < lines.length; i++) {
 		var line = lines[i];
@@ -168,5 +199,3 @@ function writeData(data) {
 	writeStream.write(data);
 	writeStream.end();
 }
-
-c.queue('https://github.com/android/platform_frameworks_base');
