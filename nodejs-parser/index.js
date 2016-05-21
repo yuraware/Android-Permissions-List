@@ -14,29 +14,36 @@ var urlMap = {};
 var fileNameMap = {};
 
 var dir = require('node-dir');
+var fs = require('fs');
+
 
 traverseFiles();
 
-function traverseFiles() {
+function traverseFiles() {	
 	dir.paths(__dirname, true, function(err, paths) {
     	if (err) throw err;
 
     	for (var i in paths) {
     		var path = paths[i];
-    		var content = readFile(path);
-
-    		var parsed = parseFile(path, content);
-			if (parsed.length > 0) {
-				writeData(parsed);		
-			}
+    		if (!fs.lstatSync(path).isDirectory()) {
+    			var content = readFile(path);
+    			var parsed = parseFile(path, content);
+				if (parsed.length > 0) {
+					writeData(parsed);		
+				}
+    		}
     	}
 	});
 }
 
-var fs = require('fs');
-
 function readFile(filepath) {
-	return fs.readFileSync(filepath);
+	try {
+		var content = fs.readFileSync(filepath);
+		return content;
+	} catch (err) {
+		console.log("error reading file = " + filepath)
+		return ""
+	}
 }
 
 function crawlPages() {
@@ -60,9 +67,7 @@ function crawlPages() {
 						
 						urlMap[u] = true;
 
-						if (u.indexOf(".java") > -1) {
-							console.log("uuu =" + u);
-							
+						if (u.indexOf(".java") > -1) {							
 							var p = baseRawUrl + queuedUrl;
 							p = p.replace('/blob/', "/");
 
@@ -105,6 +110,10 @@ function crawlPages() {
 
 function parseFile(path, content) {
 	var fileName = getFileNameFromPath(path);
+	if (fileName.length == 0) return "";
+
+	console.log("parsing file at path: "  +path);
+
 	var fileParsed = fileName in fileNameMap;
 
 	if (!fileParsed) {
@@ -112,11 +121,14 @@ function parseFile(path, content) {
 		fileNameMap[fileName] = true;
 
 		var data = '';
+
 		if (title.length > 0) {
 			var permissions = getPermissionsFromString(content);
 
+			var relativePath = path.replace(__dirname + "/source_code/",'');
+
 			if (permissions.length > 0) {
-				data += '\n' + title + '\n';
+				data += '\n' + relativePath + '\n';
 				//console.log("title = " + title);
 				data += permissions;	
 			}
@@ -137,8 +149,8 @@ function getPermissionsFromString(content) {
 	for (var i = 0; i < lines.length; i++) {
 		var line = lines[i];
 		
-		if (line.indexOf('<p>Requires Permission:') > -1) {
-			line = lines[++i];
+		if (line.indexOf('<p>Requires') > -1) {
+			//line = lines[++i];
 			while (line.indexOf('android.Manifest.permission#') > -1) {
 				var permission = (line.split('#')[1]).split('}')[0] + '\n';
 				permission = permission.split(' ')[0];
@@ -156,7 +168,8 @@ function getPermissionsFromString(content) {
 
 		if (line.indexOf('public ') > -1 && methodPermissions.length > 0) {
 			var methodSignature = line;
-			
+
+			// method signature			
 			if (line.indexOf('{') === -1) {
 				while (true) {
 					line = lines[++i];
@@ -167,6 +180,15 @@ function getPermissionsFromString(content) {
 			}
 
 			methodSignature = methodSignature.replace('{', '').trim();
+
+			// public strings
+			if (methodSignature.indexOf("/**") > -1) {
+				methodSignature = methodSignature.split("/**")[0];
+			}
+
+			if (methodSignature.indexOf("//") > -1) {
+				methodSignature = methodSignature.split("//")[0];
+			}
 		}
 
 		if (methodPermissions.length > 0 && methodSignature !== undefined 
@@ -180,6 +202,8 @@ function getPermissionsFromString(content) {
 		}
 
 	}
+
+	data = data.replace(/ +(?= )/g,'');
 
 	return data;
 }
@@ -195,6 +219,7 @@ function getFileNameFromPath(path) {
 }
 
 function writeData(data) {
+	data = data.replace(/\n\s*\n/g, '\n\n');
 	var writeStream = fs.createWriteStream('Permission.txt', {'flags' : 'a'});
 	writeStream.write(data);
 	writeStream.end();
