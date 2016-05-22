@@ -1,4 +1,4 @@
-### List of permissions for requesting at run time (introduced in Android 6.0 -API level 23)
+### List of permissions for requesting at run time (introduced in Android 6.0 - API level 23)
 
 #### [Android reference](https://developer.android.com/training/permissions/requesting.html)
 
