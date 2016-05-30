@@ -5,7 +5,7 @@
 telephony/java/android/telephony/TelephonyManager.java
 
 public void enableLocationUpdates()
-CONTROL_LOCATION_UPDATES
+[CONTROL_LOCATION_UPDATES](https://developer.android.com/reference/android/Manifest.permission.html#CONTROL_LOCATION_UPDATES)
 
 public void enableLocationUpdates(int subId)
 CONTROL_LOCATION_UPDATES
