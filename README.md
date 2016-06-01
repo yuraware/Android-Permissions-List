@@ -2,7 +2,7 @@
 
 #### [Android reference](https://developer.android.com/training/permissions/requesting.html)
 
-telephony/java/android/telephony/TelephonyManager.java
+[TelephonyManager.java](https://github.com/android/platform_frameworks_base/blob/master/telephony/java/android/telephony/TelephonyManager.java)
 
 public void enableLocationUpdates()
 [CONTROL_LOCATION_UPDATES](https://developer.android.com/reference/android/Manifest.permission.html#CONTROL_LOCATION_UPDATES)
@@ -17,7 +17,7 @@ public List<CellInfo> getAllCellInfo()
 [ACCESS_COARSE_LOCATION](https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_COARSE_LOCATION)
 
 
-core/java/android/bluetooth/BluetoothA2dp.java
+[BluetoothA2dp.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothA2dp.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
