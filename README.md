@@ -41,7 +41,7 @@ public boolean isA2dpPlaying(BluetoothDevice device)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothA2dpSink.java
+[BluetoothA2dpSink.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothA2dpSink.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.a2dp-sink.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -71,7 +71,7 @@ public boolean isA2dpPlaying(BluetoothDevice device)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothAdapter.java
+[BluetoothAdapter.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothAdapter.java)
 
 public static final String ACTION_STATE_CHANGED = "android.bluetooth.adapter.action.STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -182,13 +182,13 @@ public void stopLeScan(LeScanCallback callback)
 [BLUETOOTH_ADMIN](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH_ADMIN)
 
 
-core/java/android/bluetooth/BluetoothAvrcpController.java
+[BluetoothAvrcpController.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothAvrcpController.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.avrcp-controller.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothDevice.java
+[BluetoothDevice.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothDevice.java)
 
 public static final String ACTION_FOUND = "android.bluetooth.device.action.FOUND"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -303,7 +303,7 @@ public BluetoothSocket createScoSocket() throws IOException
 [BLUETOOTH_ADMIN](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH_ADMIN)
 
 
-core/java/android/bluetooth/BluetoothGatt.java
+[BluetoothGatt.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothGatt.java)
 
 public void disconnect()
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -348,7 +348,7 @@ public boolean requestMtu(int mtu)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothGattCharacteristic.java
+[BluetoothGattCharacteristic.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothGattCharacteristic.java)
 
 public BluetoothGattCharacteristic(UUID uuid, int properties, int permissions)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -357,7 +357,7 @@ public boolean addDescriptor(BluetoothGattDescriptor descriptor)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothGattDescriptor.java
+[BluetoothGattDescriptor.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothGattDescriptor.java)
 
 public BluetoothGattDescriptor(UUID uuid, int permissions)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -369,7 +369,7 @@ public int getInstanceId()
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothGattServer.java
+[BluetoothGattServer.java]https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothGattServer.java
 
 public boolean connect(BluetoothDevice device, boolean autoConnect)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -399,7 +399,7 @@ public BluetoothGattService getService(UUID uuid)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothGattService.java
+[BluetoothGattService.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothGattService.java)
 
 public BluetoothGattService(UUID uuid, int serviceType)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -411,7 +411,7 @@ public boolean addCharacteristic(BluetoothGattCharacteristic characteristic)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothHeadset.java
+[BluetoothHeadset.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothHeadset.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -450,7 +450,7 @@ public boolean sendVendorSpecificResultCode(BluetoothDevice device, String comma
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothHealth.java
+[BluetoothHealth.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothHealth.java)
 
 public boolean registerSinkAppConfiguration(String name, int dataType, BluetoothHealthCallback callback)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -483,7 +483,7 @@ public List<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothInputDevice.java
+[BluetoothInputDevice.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothInputDevice.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.input.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -519,7 +519,7 @@ public boolean sendData(BluetoothDevice device, String report)
 [BLUETOOTH_ADMIN](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH_ADMIN)
 
 
-core/java/android/bluetooth/BluetoothManager.java
+[BluetoothManager.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothManager.java)
 
 public int getConnectionState(BluetoothDevice device, int profile)
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -531,7 +531,7 @@ public List<BluetoothDevice> getDevicesMatchingConnectionStates(int profile, int
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothPan.java
+[BluetoothPan.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothPan.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.pan.profile.action.CONNECTION_STATE_CHANGED"; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -543,7 +543,7 @@ public boolean disconnect(BluetoothDevice device)
 [BLUETOOTH_ADMIN](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH_ADMIN)
 
 
-core/java/android/bluetooth/BluetoothProfile.java
+[BluetoothProfile.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothProfile.java)
 
 public List<BluetoothDevice> getConnectedDevices(); 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
@@ -552,25 +552,25 @@ public int getConnectionState(BluetoothDevice device);
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/bluetooth/BluetoothSap.java
+[BluetoothSap.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/bluetooth/BluetoothSap.java)
 
 public static final String ACTION_CONNECTION_STATE_CHANGED = "android.bluetooth.sap.profile.action.CONNECTION_STATE_CHANGED"; private IBluetoothSap mService; private final Context mContext; private ServiceListener mServiceListener; private BluetoothAdapter mAdapter; 
 [BLUETOOTH](https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH)
 
 
-core/java/android/nfc/tech/Ndef.java
+[Ndef.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/nfc/tech/Ndef.java)
 
 public boolean isWritable()
 [NFC](https://developer.android.com/reference/android/Manifest.permission.html#NFC)
 
 
-core/java/android/net/VpnService.java
+[VpnService.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/net/VpnService.java)
 
 public static void prepareAndAuthorize(Context context)
 [CONTROL_VPN](https://developer.android.com/reference/android/Manifest.permission.html#CONTROL_VPN)
 
 
-core/java/android/hardware/hdmi/HdmiControlManager.java
+[HdmiControlManager.java](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/hardware/hdmi/HdmiControlManager.java)
 
 public static final String ACTION_OSD_MESSAGE = "android.hardware.hdmi.action.OSD_MESSAGE"; 
 [HDMI_CEC](https://developer.android.com/reference/android/Manifest.permission.html#HDMI_CEC)
